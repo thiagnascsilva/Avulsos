@@ -1,1 +1,4 @@
+# Python >= 3.10
+
+# HTTP (arquivos públicos de resultados do TSE)
 requests>=2.34

@@ -1,3 +1,5 @@
+Atualizado em: segunda-feira, 26/10/2026.
+
 # Avulsos
 
 Scripts avulsos, um por arquivo.
@@ -9,8 +11,8 @@ Acompanha no terminal a apuração da eleição para Presidente de 2026, lendo o
 
 ### Requisitos
 
-- Python 3
-- `requests`
+- Python 3.10+
+- `requests` 2.34+
 
 ```
 pip install -r requirements.txt
