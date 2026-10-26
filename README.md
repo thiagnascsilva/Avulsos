@@ -1,4 +1,4 @@
-Atualizado em: segunda-feira, 26/10/2026.
+Atualizado em: Segunda-feira, 26/10/2026.
 
 # Avulsos
 
