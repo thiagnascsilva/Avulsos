@@ -13,7 +13,7 @@ Acompanha no terminal a apuração da eleição para Presidente de 2026, lendo o
 - `requests`
 
 ```
-pip install requests
+pip install -r requirements.txt
 ```
 
 ### Uso
