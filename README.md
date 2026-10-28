@@ -1,15 +1,15 @@
-Atualizado em: Segunda-feira, 26/10/2026.
+Last updated: Monday, October 26, 2026.
 
 # Avulsos
 
-Scripts avulsos, um por arquivo.
+Standalone scripts, one per file.
 
 ## TSE_Eleicoes.py
 
-Acompanha no terminal a apuração da eleição para Presidente de 2026, lendo os arquivos públicos do TSE
+Follows the vote count of Brazil's 2026 presidential election live in the terminal, reading the public files published by the TSE, Brazil's Superior Electoral Court
 ([resultados.tse.jus.br](https://resultados.tse.jus.br)).
 
-### Requisitos
+### Requirements
 
 - Python 3.10+
 - `requests` 2.34+
@@ -18,29 +18,34 @@ Acompanha no terminal a apuração da eleição para Presidente de 2026, lendo o
 pip install -r requirements.txt
 ```
 
-### Uso
+### Usage
 
 ```
-python TSE_Eleicoes.py [turno]
+python TSE_Eleicoes.py [round]
 ```
 
-`turno` pode ser `1` ou `2`. Sem o argumento, mostra o 2º turno.
+`round` can be `1` or `2`. Without the argument, it shows the second round.
 
-A tela é atualizada a cada 10 segundos (constante `INTERVALO`) até a apuração chegar a 100%. Ctrl+C para sair.
+The screen refreshes every 10 seconds (constant `INTERVALO`) until the count reaches 100%. Press Ctrl+C to exit.
 
-### O que mostra
+### What it shows
 
-- **Candidatos:** votos, percentual, projeção de votos, quanto falta para o 1º colocado ser eleito
-  matematicamente (só no 2º turno) e a situação informada pelo TSE.
-- **Por estado:** percentual de seções apuradas e de cada candidato, com a linha colorida pela cor de quem lidera
-  e a indicação de quando um candidato já ganhou o estado matematicamente. Ficam destacados o estado com a disputa
-  mais acirrada e o de maior vantagem de cada candidato.
-- **Por região:** os mesmos percentuais, somando os estados de cada região (sem o exterior).
-- **Resultado definitivo:** quando o TSE declara o eleito.
+- **Candidates:** votes, percentage, projected votes, how many votes the leader still needs to be mathematically
+  elected (second round only), and the status reported by the TSE.
+- **By state:** percentage of polling sections counted and each candidate's share, with each row colored by the leading
+  candidate and a flag when a candidate has mathematically won the state. The closest race and each candidate's
+  largest lead are highlighted.
+- **By region:** the same percentages, aggregated over the states in each region (excluding votes cast abroad).
+- **Final result:** when the TSE declares the winner.
 
-### Projeção
+### How it works
 
-Em cada estado (e no exterior), os votos que ainda faltam apurar são divididos na proporção que cada candidato tem
-até agora naquele estado. Em estado sem nenhuma seção apurada, usa o comparecimento e a divisão de votos do 1º turno.
+**Projection.** The votes still to be counted are distributed as if they will follow the proportion each candidate
+has received so far. This is done separately for each state (and for votes cast abroad), then summed for the national
+projection. For a state with no sections counted yet, it uses the turnout and vote split from the first round.
 
-Os dados do 1º turno, já encerrado, são baixados uma vez e guardados na pasta temporária do sistema (`tse_ele2026`).
+**Mathematical win.** For each state and for the national total, the script checks whether a candidate has already
+won mathematically, that is, whether their lead is larger than all the votes still left to count, so no outcome of the
+remaining votes could change the result.
+
+First-round data, already final, is downloaded once and cached in the system's temporary folder (`tse_ele2026`).
