@@ -19,7 +19,7 @@ The code follows [PEP 8](https://peps.python.org/pep-0008/), with names in Portu
 | Python special name | `__dunder__` | `__name__` |
 
 - Avoid `camelCase` (`votosPorNumero`) in functions and variables.
-- `_name` marks an internal detail that should not be used from outside. It is only a convention: Python does not enforce it.
+- `_name` marks an internal detail that should not be used from outside.
 - `__name__` is reserved for Python's special names: it is not private, and new ones are not created.
 - Code that runs goes in `def main():`, called by `if __name__ == "__main__": main()`. The top of the file holds only imports, constants and functions.
 - Type hints where they help readability: `def formatar_percentual(parte: int, total: int) -> str:`.
