@@ -10,20 +10,19 @@ The code follows [PEP 8](https://peps.python.org/pep-0008/), with names in Portu
 
 | Kind | Format | Example |
 |---|---|---|
-| Variable | `snake_case`, a noun | `total_alunos` |
-| Function | `snake_case`, starting with an infinitive verb | `calcular_media()` |
-| Constant | `UPPER_CASE`, at the top of the module | `TAXA_JUROS = 0.05` |
-| Class | `PascalCase` | `QuestaoProva` |
-| Module/file | short `snake_case` | `estatistica.py` |
-| Boolean | `is_` or `tem_` prefix | `is_valido`, `tem_gabarito` |
-| Internal use | `_` prefix | `_cache`, `_somar()` |
-| Python special name | `__dunder__` | `__init__` |
+| Variable | `snake_case`, a noun | `total_projetado` |
+| Function | `snake_case`, starting with an infinitive verb | `projetar_votos()` |
+| Constant | `UPPER_CASE`, at the top of the module | `INTERVALO = 10` |
+| Module/file | short `snake_case` | `tse_eleicoes.py` |
+| Boolean | `is_` or `tem_` prefix | `is_eleito`, `tem_cache` |
+| Internal use | `_` prefix | `_sessao`, `_baixar_json()` |
+| Python special name | `__dunder__` | `__name__` |
 
 - Avoid `camelCase` (`votosPorNumero`) in functions and variables.
 - `_name` marks an internal detail that should not be used from outside. It is only a convention: Python does not enforce it.
 - `__name__` is reserved for Python's special names: it is not private, and new ones are not created.
 - Code that runs goes in `def main():`, called by `if __name__ == "__main__": main()`. The top of the file holds only imports, constants and functions.
-- Type hints where they help readability: `def calcular_media(notas: list[float]) -> float:`.
+- Type hints where they help readability: `def formatar_percentual(parte: int, total: int) -> str:`.
 
 To check the names:
 
