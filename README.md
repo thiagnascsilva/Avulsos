@@ -1,10 +1,37 @@
-Atualizado em: Segunda-feira, 26/10/2026.
+Atualizado em: Quinta-feira, 29/10/2026.
 
 # Avulsos
 
 Scripts avulsos, um por arquivo.
 
-## TSE_Eleicoes.py
+## Convenção de nomes
+
+O código segue a [PEP 8](https://peps.python.org/pep-0008/), com os nomes em português.
+
+| Tipo | Formato | Exemplo |
+|---|---|---|
+| Variável | `snake_case`, substantivo | `total_alunos` |
+| Função | `snake_case`, começando por verbo no infinitivo | `calcular_media()` |
+| Constante | `MAIÚSCULAS`, no topo do módulo | `TAXA_JUROS = 0.05` |
+| Classe | `PascalCase` | `QuestaoProva` |
+| Módulo/arquivo | `snake_case` curto | `estatistica.py` |
+| Booleano | prefixo `is_` ou `tem_` | `is_valido`, `tem_gabarito` |
+| Uso interno | prefixo `_` | `_cache`, `_somar()` |
+| Nome especial do Python | `__dunder__` | `__init__` |
+
+- Evite `camelCase` (`votosPorNumero`) em funções e variáveis.
+- `_nome` indica detalhe interno, que não deve ser usado de fora. É só convenção: o Python não bloqueia.
+- `__nome__` é reservado para os nomes especiais do Python: não é privado, e não se criam novos.
+- O código que executa fica em `def main():`, chamado por `if __name__ == "__main__": main()`. No topo do arquivo ficam imports, constantes e funções.
+- Type hints quando ajudarem a leitura: `def calcular_media(notas: list[float]) -> float:`.
+
+Para conferir os nomes:
+
+```
+ruff check --select N .
+```
+
+## tse_eleicoes.py
 
 Acompanha no terminal a apuração da eleição para Presidente de 2026, lendo os arquivos públicos do TSE
 ([resultados.tse.jus.br](https://resultados.tse.jus.br)).
@@ -21,7 +48,7 @@ pip install -r requirements.txt
 ### Uso
 
 ```
-python TSE_Eleicoes.py [turno]
+python tse_eleicoes.py [turno]
 ```
 
 `turno` pode ser `1` ou `2`. Sem o argumento, mostra o 2º turno.
