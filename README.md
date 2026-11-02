@@ -4,10 +4,6 @@ Last updated: Sunday, November 1, 2026.
 
 Standalone scripts, one per file.
 
-## Naming convention
-
-Standardization per: [Padronizacao](https://github.com/thiagnascsilva/Padronizacao) (in Portuguese).
-
 ## tse_eleicoes.py
 
 Follows the vote count of Brazil's 2026 presidential election live in the terminal, reading the public files published by the TSE, Brazil's Superior Electoral Court
@@ -53,3 +49,7 @@ won mathematically, that is, whether their lead is larger than all the votes sti
 remaining votes could change the result.
 
 First-round data, already final, is downloaded once and cached in the system's temporary folder (`tse_ele2026`).
+
+## Naming convention
+
+Standardization per: [Padronizacao](https://github.com/thiagnascsilva/Padronizacao) (in Portuguese).
