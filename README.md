@@ -1,4 +1,4 @@
-Last updated: Thursday, October 29, 2026.
+Last updated: Sunday, November 1, 2026.
 
 # Avulsos
 
@@ -6,29 +6,7 @@ Standalone scripts, one per file.
 
 ## Naming convention
 
-The code follows [PEP 8](https://peps.python.org/pep-0008/), with names in Portuguese.
-
-| Kind | Format | Example |
-|---|---|---|
-| Variable | `snake_case`, a noun | `total_projetado` |
-| Function | `snake_case`, starting with an infinitive verb | `projetar_votos()` |
-| Constant | `UPPER_CASE`, at the top of the module | `INTERVALO = 10` |
-| Module/file | short `snake_case` | `tse_eleicoes.py` |
-| Boolean | `is_` or `tem_` prefix | `is_eleito`, `tem_cache` |
-| Internal use | `_` prefix | `_sessao`, `_baixar_json()` |
-| Python special name | `__dunder__` | `__name__` |
-
-- Avoid `camelCase` (`votosPorNumero`) in functions and variables.
-- `_name` marks an internal detail that should not be used from outside.
-- `__name__` is reserved for Python's special names: it is not private, and new ones are not created.
-- Code that runs goes in `def main():`, called by `if __name__ == "__main__": main()`. The top of the file holds only imports, constants and functions.
-- Type hints where they help readability: `def formatar_percentual(parte: int, total: int) -> str:`.
-
-To check the names:
-
-```
-ruff check --select N .
-```
+Standardization per: [Padronizacao](https://github.com/thiagnascsilva/Padronizacao) (in Portuguese).
 
 ## tse_eleicoes.py
 
