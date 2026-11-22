@@ -1,6 +1,4 @@
-"""Simula o Mundial 2026 de xadrez entre Javokhir Sindarov e Gukesh D.
-
-O modelo combina duas fontes:
+"""
 1. Ratings FIDE (modelo Elo em elo_model.py, com vantagem das brancas e taxa
    de empate calculada pelos ratings).
 2. Todos os confrontos diretos clássicos, salvos em um arquivo JSON ao lado
