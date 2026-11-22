@@ -23,8 +23,9 @@ from collections import Counter
 from datetime import date
 from pathlib import Path
 
-from config import (EVENTO_MUNDIAL, FORCA_PRIOR, MEIA_VIDA_ANOS, N_SIMULACOES,
-                    PARTIDAS_MATCH, PONTOS_TITULO, RATINGS)
+from config import (BRANCAS_PARTIDA_1, EVENTO_MUNDIAL, FORCA_PRIOR,
+                    MEIA_VIDA_ANOS, N_SIMULACOES, PARTIDAS_MATCH,
+                    PONTOS_TITULO, RATINGS)
 from elo_model import calcular_probabilidades_elo
 
 ARQUIVO_HISTORICO = Path(__file__).with_name("historico_sindarov_gukesh.json")
@@ -72,9 +73,7 @@ def obter_adversario(jogador: str) -> str:
 def conferir_cores_mundial(historico: list[dict]) -> None:
     """Confere se as cores das partidas do Mundial alternam a partir da 1."""
     partidas_match = [p for p in historico if p["evento"] == EVENTO_MUNDIAL]
-    if not partidas_match:
-        return
-    primeiro = partidas_match[0]["brancas"]
+    primeiro = BRANCAS_PARTIDA_1
     for numero, partida in enumerate(partidas_match, start=1):
         if numero % 2 == 1:
             esperado = primeiro
@@ -84,7 +83,8 @@ def conferir_cores_mundial(historico: list[dict]) -> None:
             raise SystemExit(
                 f"{EVENTO_MUNDIAL}, partida {numero}: brancas deveriam ser "
                 f"{esperado}, mas o JSON diz {partida['brancas']}. "
-                f"As cores alternam a partir da partida 1 ({primeiro})."
+                f"As cores alternam a partir da partida 1 ({primeiro}, "
+                f"BRANCAS_PARTIDA_1 em config.py)."
             )
 
 
@@ -166,19 +166,16 @@ def simular_match(historico: list[dict], n_simulacoes: int,
                   rng: random.Random) -> dict:
     """Monte Carlo do match, partindo do placar atual do Mundial.
 
-    As cores seguem a partida 1 do histórico. Sem partidas do Mundial,
-    quem tem brancas na partida 1 é sorteado em cada simulação.
+    As cores alternam a partir de BRANCAS_PARTIDA_1 (config.py).
     """
     tabela = montar_tabela_probabilidades(historico)
     partidas_match = [p for p in historico if p["evento"] == EVENTO_MUNDIAL]
     placar_inicial = sum(calcular_pontos_sindarov(p) for p in partidas_match)
     jogadas_inicial = len(partidas_match)
-    brancas_jogo1 = partidas_match[0]["brancas"] if partidas_match else None
 
     titulos = Counter()
     placares = Counter()
     for _ in range(n_simulacoes):
-        primeiro = brancas_jogo1 or rng.choice(JOGADORES)
         pontos_sindarov = placar_inicial
         jogadas = jogadas_inicial
         while jogadas < PARTIDAS_MATCH:
@@ -186,9 +183,9 @@ def simular_match(historico: list[dict], n_simulacoes: int,
             if max(pontos_sindarov, pontos_gukesh) >= PONTOS_TITULO:
                 break
             if jogadas % 2 == 0:
-                cor = primeiro
+                cor = BRANCAS_PARTIDA_1
             else:
-                cor = obter_adversario(primeiro)
+                cor = obter_adversario(BRANCAS_PARTIDA_1)
             pontos_sindarov += sortear_pontos(tabela[cor], rng)
             jogadas += 1
         pontos_gukesh = jogadas - pontos_sindarov

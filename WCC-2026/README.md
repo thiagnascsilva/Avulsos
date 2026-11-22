@@ -68,10 +68,9 @@ data.
 between the two players are added on top, each weighted by age: a game loses half its weight every six months
 (`MEIA_VIDA_ANOS`).
 
-**Match.** Recorded match games make up the starting score, and only the remaining games are simulated. Colors
-alternate from game 1; before any match game is recorded, the player with White in game 1 is drawn at random in each
-simulation. A player wins the title at 7½ points. At 7–7 the match counts as drawn, because the tiebreak
-is not simulated.
+**Match.** Recorded match games make up the starting score, and only the remaining games are simulated. Sindarov
+has White in game 1 (`BRANCAS_PARTIDA_1` in `config.py`) and colors alternate from there. A player wins the title at
+7½ points. At 7–7 the match counts as drawn, because the tiebreak is not simulated.
 
 ## Naming convention
 

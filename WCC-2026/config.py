@@ -7,6 +7,7 @@ RATINGS = {
 # Partidas com este evento entram no placar do match.
 EVENTO_MUNDIAL = "Mundial 2026"
 PARTIDAS_MATCH = 14
+BRANCAS_PARTIDA_1 = "Sindarov"   # cores alternam a partir daqui
 PONTOS_TITULO = 7.5
 
 # Simulação
