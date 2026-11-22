@@ -6,9 +6,6 @@ VANTAGEM_BRANCAS = 35   # bônus de Elo para quem joga de brancas
 #   empate = BASE
 #            + INCLINACAO_MEDIA * (média - REFERENCIA)
 #            - QUEDA_DIFERENCA * |diferença|
-# Empata-se mais quanto mais alto o nível e menos quanto maior a diferença
-# (já com a vantagem das brancas). Calibrado para a elite: ~60% entre dois
-# 2700 de mesmo rating, ~70% entre dois 2800.
 EMPATE_BASE = 0.60
 EMPATE_REFERENCIA = 2700
 EMPATE_INCLINACAO_MEDIA = 0.001   # +0,1 p.p. por ponto de média
