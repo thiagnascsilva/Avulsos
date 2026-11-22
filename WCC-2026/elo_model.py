@@ -3,9 +3,7 @@
 VANTAGEM_BRANCAS = 35   # bônus de Elo para quem joga de brancas
 
 # Taxa de empate, calculada a partir dos ratings:
-#   empate = BASE
-#            + INCLINACAO_MEDIA * (média - REFERENCIA)
-#            - QUEDA_DIFERENCA * |diferença|
+# Empate = BASE+INCLINACAO_MEDIA*(média - REFERENCIA)-QUEDA_DIFERENCA*|diferença|
 EMPATE_BASE = 0.60
 EMPATE_REFERENCIA = 2700
 EMPATE_INCLINACAO_MEDIA = 0.001   # +0,1 p.p. por ponto de média

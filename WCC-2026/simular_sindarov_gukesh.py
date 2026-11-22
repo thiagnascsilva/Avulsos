@@ -13,12 +13,10 @@ simuladas: 7 x 7 conta como empate, sem desempate.
 
 Uso:
     python simular_sindarov_gukesh.py
-    python simular_sindarov_gukesh.py --semente 1 --brancas-jogo1 Gukesh
 
 Novas partidas são adicionadas à mão no arquivo JSON.
 """
 
-import argparse
 import json
 import random
 from collections import Counter
@@ -63,21 +61,31 @@ def carregar_historico(caminho: Path = ARQUIVO_HISTORICO) -> list[dict]:
                 f"Partida {indice}: resultado inválido {resultado!r}. "
                 f"Use {', '.join(RESULTADOS_VALIDOS)}."
             )
+    conferir_cores_mundial(historico)
     return historico
-
-
-def normalizar_jogador(nome: str) -> str:
-    """Aceita variações de grafia (Sendarov, Gokesh, iniciais...)."""
-    nome_minusculo = nome.strip().lower()
-    if nome_minusculo.startswith("s"):
-        return SINDAROV
-    if nome_minusculo.startswith("g"):
-        return GUKESH
-    raise ValueError(f"Jogador desconhecido: {nome!r}")
 
 
 def obter_adversario(jogador: str) -> str:
     return GUKESH if jogador == SINDAROV else SINDAROV
+
+
+def conferir_cores_mundial(historico: list[dict]) -> None:
+    """Confere se as cores das partidas do Mundial alternam a partir da 1."""
+    partidas_match = [p for p in historico if p["evento"] == EVENTO_MUNDIAL]
+    if not partidas_match:
+        return
+    primeiro = partidas_match[0]["brancas"]
+    for numero, partida in enumerate(partidas_match, start=1):
+        if numero % 2 == 1:
+            esperado = primeiro
+        else:
+            esperado = obter_adversario(primeiro)
+        if partida["brancas"] != esperado:
+            raise SystemExit(
+                f"{EVENTO_MUNDIAL}, partida {numero}: brancas deveriam ser "
+                f"{esperado}, mas o JSON diz {partida['brancas']}. "
+                f"As cores alternam a partir da partida 1 ({primeiro})."
+            )
 
 
 def calcular_pontos_sindarov(partida: dict) -> float:
@@ -155,15 +163,17 @@ def sortear_pontos(probabilidades: Probabilidades,
 # ---------------------------------------------------------------- simulação
 
 def simular_match(historico: list[dict], n_simulacoes: int,
-                  rng: random.Random,
-                  brancas_jogo1: str | None = None) -> dict:
-    """Monte Carlo do match, partindo do placar atual do Mundial."""
+                  rng: random.Random) -> dict:
+    """Monte Carlo do match, partindo do placar atual do Mundial.
+
+    As cores seguem a partida 1 do histórico. Sem partidas do Mundial,
+    quem tem brancas na partida 1 é sorteado em cada simulação.
+    """
     tabela = montar_tabela_probabilidades(historico)
     partidas_match = [p for p in historico if p["evento"] == EVENTO_MUNDIAL]
     placar_inicial = sum(calcular_pontos_sindarov(p) for p in partidas_match)
     jogadas_inicial = len(partidas_match)
-    if partidas_match:
-        brancas_jogo1 = partidas_match[0]["brancas"]
+    brancas_jogo1 = partidas_match[0]["brancas"] if partidas_match else None
 
     titulos = Counter()
     placares = Counter()
@@ -239,30 +249,11 @@ def exibir_simulacao(resultado: dict) -> None:
               f"{formatar_pontos(pontos_g):<3} Gukesh  {contagem / n:6.1%}")
 
 
-# ---------------------------------------------------------------- CLI
-
-def criar_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
-        description="Simulador Sindarov x Gukesh (Mundial 2026)."
-    )
-    parser.add_argument(
-        "--semente", type=int, default=None, help="semente aleatória"
-    )
-    parser.add_argument(
-        "--brancas-jogo1", default=None,
-        help="quem tem brancas no jogo 1 (padrão: sorteio)",
-    )
-    return parser
-
+# ---------------------------------------------------------------- main
 
 def main() -> None:
-    args = criar_parser().parse_args()
     historico = carregar_historico()
-    brancas_jogo1 = None
-    if args.brancas_jogo1:
-        brancas_jogo1 = normalizar_jogador(args.brancas_jogo1)
-    rng = random.Random(args.semente)
-    resultado = simular_match(historico, N_SIMULACOES, rng, brancas_jogo1)
+    resultado = simular_match(historico, N_SIMULACOES, random.Random())
     exibir_simulacao(resultado)
 
 

@@ -2,8 +2,9 @@ Last updated: Sunday, November 22, 2026.
 
 # WCC 2026
 
-Monte Carlo simulation of the 2026 World Chess Championship match between Gukesh Dommaraju and Javokhir Sindarov.
-It estimates each player's chance of winning the title, starting from the current score of the match.
+Monte Carlo simulation of the 2026 World Chess Championship match between Gukesh and Sindarov.
+It estimates each player's chance of winning the match in the classical format (14 classical games), starting from the
+current score. Rapid and blitz tiebreaks are not simulated, so a 7–7 score counts as a drawn match.
 
 ## Requirements
 
@@ -12,13 +13,8 @@ It estimates each player's chance of winning the title, starting from the curren
 ## Usage
 
 ```
-python simular_sindarov_gukesh.py [--semente N] [--brancas-jogo1 PLAYER]
+python simular_sindarov_gukesh.py
 ```
-
-- `--semente`: random seed, for reproducible runs.
-- `--brancas-jogo1`: who has White in game 1 (`Sindarov` or `Gukesh`). Only used while no match game is recorded;
-  after that, the colors come from game 1 in the history. Without it, the colors are drawn at random in each
-  simulation.
 
 Each run plays 100,000 simulated matches (`N_SIMULACOES` in `config.py`).
 
@@ -73,7 +69,8 @@ between the two players are added on top, each weighted by age: a game loses hal
 (`MEIA_VIDA_ANOS`).
 
 **Match.** Recorded match games make up the starting score, and only the remaining games are simulated. Colors
-alternate from game 1. A player wins the title at 7½ points. At 7–7 the match counts as drawn, because the tiebreak
+alternate from game 1; before any match game is recorded, the player with White in game 1 is drawn at random in each
+simulation. A player wins the title at 7½ points. At 7–7 the match counts as drawn, because the tiebreak
 is not simulated.
 
 ## Naming convention
