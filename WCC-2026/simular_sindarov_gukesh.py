@@ -243,8 +243,7 @@ def exibir_simulacao(resultado: dict) -> None:
     print("\nPlacares (todos, do mais provável ao menos):")
     for (pontos_s, pontos_g), contagem in resultado["placares"].most_common():
         print(f"  Sindarov {formatar_pontos(pontos_s):>3} x "
-              f"{formatar_pontos(pontos_g):<3} Gukesh  {contagem / n:8.3%}"
-              f"  ({contagem} de {n})")
+              f"{formatar_pontos(pontos_g):<3} Gukesh  {contagem / n:8.3%}")
 
 
 # ---------------------------------------------------------------- main
