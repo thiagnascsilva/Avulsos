@@ -16,7 +16,7 @@ current score. Rapid and blitz tiebreaks are not simulated, so a 7–7 score cou
 python simular_sindarov_gukesh.py
 ```
 
-Each run plays 1,000,000 simulated matches (`N_SIMULACOES` in `config.py`).
+Each run plays 100,000 simulated matches (`N_SIMULACOES` in `config.py`).
 
 ## Files
 
