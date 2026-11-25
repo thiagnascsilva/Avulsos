@@ -240,11 +240,14 @@ def exibir_simulacao(resultado: dict) -> None:
     metade = formatar_pontos(PARTIDAS_MATCH / 2)
     print(f"  Empate ({metade} x {metade}): {titulos[EMPATE] / n:6.1%}")
 
-    print("\nPlacares (todos, do mais provável ao menos):")
+    print("\nPlacares (do mais provável ao menos; omite os que dão 0.00%):")
     for (pontos_s, pontos_g), contagem in resultado["placares"].most_common():
+        probabilidade = f"{contagem / n:.2%}"
+        if probabilidade == "0.00%":
+            break  # em ordem decrescente: os seguintes também arredondam a 0
         print(f"  Sindarov {formatar_pontos(pontos_s):>3} x "
               f"{formatar_pontos(pontos_g):<3} Gukesh  "
-              f"({int(pontos_s + pontos_g):>2} partidas)  {contagem / n:8.3%}")
+              f"({int(pontos_s + pontos_g):>2} partidas)  {probabilidade:>7}")
 
 
 # ---------------------------------------------------------------- main
