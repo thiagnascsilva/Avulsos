@@ -11,7 +11,7 @@ BRANCAS_PARTIDA_1 = "Sindarov"   # cores alternam a partir daqui
 PONTOS_TITULO = 7.5
 
 # Simulação
-N_SIMULACOES = 100_000
+N_SIMULACOES = 1_000_000
 
 # Confronto direto
 FORCA_PRIOR = 30.0      # peso dos ratings, em "partidas equivalentes"
