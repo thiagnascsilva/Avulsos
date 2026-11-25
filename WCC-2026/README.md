@@ -8,7 +8,8 @@ current score. Rapid and blitz tiebreaks are not simulated, so a 7–7 score cou
 
 ## Requirements
 
-- Python 3.10+ (standard library only)
+- Python 3.10+ (standard library only for the simulation)
+- matplotlib, only for the chart (`pip install matplotlib`)
 
 ## Usage
 
@@ -17,6 +18,14 @@ python simular_sindarov_gukesh.py
 ```
 
 Each run plays 100,000 simulated matches (`N_SIMULACOES` in `config.py`).
+
+To chart how the title chances changed over the match:
+
+```
+python plotar_evolucao_probabilidades.py
+```
+
+This reads `evolucao_probabilidades.csv` and saves `evolucao_probabilidades.png`.
 
 ## Files
 
@@ -27,6 +36,8 @@ Each run plays 100,000 simulated matches (`N_SIMULACOES` in `config.py`).
 | `elo_model.py` | Elo model for a single classical game, including the draw-rate formula. |
 | `historico_sindarov_gukesh.json` | Classical head-to-head games, including the match games. |
 | `evolucao_probabilidades.csv` | Title chances after each match game, kept by hand for charting. |
+| `plotar_evolucao_probabilidades.py` | Plots the CSV as a line chart. |
+| `evolucao_probabilidades.png` | The chart, regenerated after each game. |
 
 ## After each match game
 
@@ -49,6 +60,7 @@ All updates are manual:
 2. Update the live ratings in `config.py`.
 3. Run the script and add a row to `evolucao_probabilidades.csv` with the number of games played and the three
    percentages (Sindarov, Gukesh, drawn match).
+4. Run `plotar_evolucao_probabilidades.py` to refresh the chart.
 
 ## What it shows
 
