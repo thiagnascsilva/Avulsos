@@ -1,4 +1,4 @@
-Last updated: Wednesday, November 25, 2026.
+Last updated: Thursday, November 26, 2026.
 
 # WCC 2026
 

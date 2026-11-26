@@ -1,6 +1,6 @@
 RATINGS = {
-    "Sindarov": 2780,
-    "Gukesh": 2712,
+    "Sindarov": 2779,
+    "Gukesh": 2713,
 }
 
 # Match
